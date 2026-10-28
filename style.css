@@ -1,0 +1,311 @@
+/* Configurações Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #000000;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Canvas 3D */
+#bg3d {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(circle at center, #1a1500 0%, #000000 90%);
+}
+
+/* Container Principal */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Header */
+.main-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.glow-text {
+    font-size: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #fff700 0%, #ffaa00 50%, #886600 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 0px 25px rgba(255, 204, 0, 0.3);
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.description {
+    font-size: 1.1rem;
+    color: #cccccc;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Títulos das Seções */
+.section-title {
+    font-size: 1.8rem;
+    color: #ffcc00;
+    margin-bottom: 25px;
+    border-left: 4px solid #ffcc00;
+    padding-left: 12px;
+}
+
+/* Grid de Cards */
+.tips-section {
+    margin-bottom: 60px;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: rgba(20, 20, 20, 0.75);
+    border: 1px solid rgba(255, 204, 0, 0.2);
+    border-radius: 16px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #ffcc00;
+    box-shadow: 0 10px 30px rgba(255, 204, 0, 0.25);
+    background: rgba(30, 28, 10, 0.85);
+}
+
+.card-icon {
+    font-size: 2.2rem;
+    color: #ffcc00;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.card p {
+    color: #aaaaaa;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.card-btn {
+    color: #ffcc00;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Modais Interativos com Efeito Destaque */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: 90%;
+    max-width: 550px;
+    background: linear-gradient(145deg, #181818 0%, #0a0a00 100%);
+    border: 2px solid #ffcc00;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 0 50px rgba(255, 204, 0, 0.4);
+    z-index: 101;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 204, 0, 0.2);
+    padding-bottom: 10px;
+}
+
+.modal-header h2 {
+    color: #ffcc00;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #ffcc00;
+}
+
+.modal-body {
+    color: #dddddd;
+    line-height: 1.6;
+}
+
+.modal-body ul {
+    margin: 15px 0 15px 20px;
+}
+
+.modal-body li {
+    margin-bottom: 8px;
+}
+
+.highlight-box {
+    background: rgba(255, 204, 0, 0.1);
+    border-left: 3px solid #ffcc00;
+    padding: 12px 15px;
+    margin-top: 15px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+/* Seção To-Do List */
+.todo-box {
+    background: rgba(15, 15, 15, 0.8);
+    border: 1px solid rgba(255, 204, 0, 0.2);
+    border-radius: 16px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 12px 18px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #080808;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #ffcc00;
+}
+
+.input-group button {
+    background: linear-gradient(135deg, #ffcc00 0%, #ff9900 100%);
+    color: #000000;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-group button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
+}
+
+.task-list {
+    list-style: none;
+}
+
+.task-list li {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.task-list li.completed span {
+    text-decoration: line-through;
+    color: #666666;
+}
+
+.check-btn {
+    background: transparent;
+    border: 1px solid #ffcc00;
+    color: #ffcc00;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.check-btn:hover {
+    background: #ffcc00;
+    color: #000;
+}

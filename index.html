@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>laynon organisaçao</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Three.js para os Objetos 3D ao fundo -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <!-- Canvas para os objetos 3D ao fundo -->
+    <canvas id="bg3d"></canvas>
+
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header class="main-header">
+            <h1 class="glow-text">laynon organisaçao</h1>
+            <p class="description">
+                Sua plataforma inteligente de gestão pessoal. Organize suas tarefas diárias, 
+                aumente sua produtividade e domine seu tempo com dicas exclusivas e interativas.
+            </p>
+        </header>
+
+        <!-- Seção de Dicas Interativas (Cards) -->
+        <section class="tips-section">
+            <h2 class="section-title">Dicas de Produtividade</h2>
+            <div class="cards-grid">
+                
+                <!-- Card 1 -->
+                <div class="card" onclick="openModal('modal1')">
+                    <div class="card-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Método Pomodoro</h3>
+                    <p>Gerencie seu tempo em blocos de foco total e descanso.</p>
+                    <span class="card-btn">Ver Detalhes <i class="fas fa-arrow-right"></i></span>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card" onclick="openModal('modal2')">
+                    <div class="card-icon"><i class="fas fa-tasks"></i></div>
+                    <h3>Matriz de Eisenhower</h3>
+                    <p>Aprenda a priorizar tarefas por urgência e importância.</p>
+                    <span class="card-btn">Ver Detalhes <i class="fas fa-arrow-right"></i></span>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card" onclick="openModal('modal3')">
+                    <div class="card-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Regra dos 2 Minutos</h3>
+                    <p>Elimine pequenas pendências de forma imediata.</p>
+                    <span class="card-btn">Ver Detalhes <i class="fas fa-arrow-right"></i></span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Simulação de Gerenciador de Tarefas -->
+        <section class="todo-section">
+            <h2 class="section-title">Minha Lista de Tarefas</h2>
+            <div class="todo-box">
+                <div class="input-group">
+                    <input type="text" id="taskInput" placeholder="Digite uma nova tarefa...">
+                    <button id="addBtn"><i class="fas fa-plus"></i> Adicionar</button>
+                </div>
+                <ul id="taskList" class="task-list">
+                    <li>
+                        <span>Estudar técnicas de organização</span>
+                        <button class="check-btn" onclick="toggleTask(this)"><i class="fas fa-check"></i></button>
+                    </li>
+                    <li>
+                        <span>Organizar espaço de trabalho</span>
+                        <button class="check-btn" onclick="toggleTask(this)"><i class="fas fa-check"></i></button>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- Efeito de Sobreposição do Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+
+    <!-- Modais Informativos -->
+    <div class="modal" id="modal1">
+        <div class="modal-header">
+            <h2><i class="fas fa-bullseye"></i> Método Pomodoro</h2>
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p><strong>Como funciona:</strong> Trabale por 25 minutos com foco total, sem distrações. Em seguida, faça uma pausa de 5 minutos.</p>
+            <p>Após completar 4 ciclos (4 "Pomodoros"), faça uma pausa maior de 15 a 30 minutos.</p>
+            <div class="highlight-box">
+                💡 <strong>Benefício:</strong> Mantém seu cérebro focado e evita o cansaço mental ao longo do dia.
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal2">
+        <div class="modal-header">
+            <h2><i class="fas fa-tasks"></i> Matriz de Eisenhower</h2>
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Divida suas tarefas em 4 quadrantes:</p>
+            <ul>
+                <li><strong>Urgente e Importante:</strong> Faça imediatamente.</li>
+                <li><strong>Importante, não Urgente:</strong> Agende para fazer depois.</li>
+                <li><strong>Urgente, não Importante:</strong> Delegue se possível.</li>
+                <li><strong>Nem Urgente, nem Importante:</strong> Elimine.</li>
+            </ul>
+            <div class="highlight-box">
+                💡 <strong>Benefício:</strong> Ajuda a focar no que realmente gera resultados e traz clareza de prioridades.
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal3">
+        <div class="modal-header">
+            <h2><i class="fas fa-brain"></i> Regra dos 2 Minutos</h2>
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Se uma nova tarefa surgir e levar menos de 2 minutos para ser concluída (como responder um e-mail simples ou arrumar a mesa), <strong>faça-a imediatamente</strong>.</p>
+            <div class="highlight-box">
+                💡 <strong>Benefício:</strong> Evita o acúmulo de pequenas pendências que causam poluição visual e ansiedade.
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts da Aplicação e 3D -->
+    <script>
+        // Lógica de Modais
+        function openModal(modalId) {
+            document.getElementById('modalOverlay').classList.add('active');
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(m => m.classList.remove('active'));
+        }
+
+        // Lógica da Lista de Tarefas
+        document.getElementById('addBtn').addEventListener('click', function() {
+            const input = document.getElementById('taskInput');
+            if(input.value.trim() !== '') {
+                const li = document.createElement('li');
+                li.innerHTML = `<span>${input.value}</span><button class="check-btn" onclick="toggleTask(this)"><i class="fas fa-check"></i></button>`;
+                document.getElementById('taskList').appendChild(li);
+                input.value = '';
+            }
+        });
+
+        function toggleTask(btn) {
+            const li = btn.parentElement;
+            li.classList.toggle('completed');
+        }
+
+        // --- Configuração dos Objetos 3D no Fundo com Three.js ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg3d'), alpha: true, antialias: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+
+        // Criando objetos geométricos 3D flutuantes
+        const geometries = [
+            new THREE.IcosahedronGeometry(1.2, 0),
+            new THREE.TorusGeometry(1, 0.4, 16, 100),
+            new THREE.OctahedronGeometry(1.5, 0),
+            new THREE.TetrahedronGeometry(1.3, 0)
+        ];
+
+        const material = new THREE.MeshStandardMaterial({ 
+            color: 0xffcc00, 
+            wireframe: true,
+            emissive: 0x221a00
+        });
+
+        const meshes = [];
+        for (let i = 0; i < 15; i++) {
+            const geom = geometries[Math.floor(Math.random() * geometries.length)];
+            const mesh = new THREE.Mesh(geom, material);
+            
+            mesh.position.x = (Math.random() - 0.5) * 30;
+            mesh.position.y = (Math.random() - 0.5) * 30;
+            mesh.position.z = (Math.random() - 0.5) * 20 - 5;
+
+            mesh.rotation.x = Math.random() * Math.PI;
+            mesh.rotation.y = Math.random() * Math.PI;
+
+            // Velocidades individuais de flutuação/rotação
+            mesh.userData = {
+                rotSpeedX: (Math.random() - 0.5) * 0.01,
+                rotSpeedY: (Math.random() - 0.5) * 0.01,
+                floatSpeed: Math.random() * 0.005 + 0.002
+            };
+
+            scene.add(mesh);
+            meshes.push(mesh);
+        }
+
+        // Iluminação 3D
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0xffcc00, 1.5);
+        pointLight.position.set(10, 10, 10);
+        scene.add(pointLight);
+
+        camera.position.z = 12;
+
+        // Loop de Animação 3D
+        function animate() {
+            requestAnimationFrame(animate);
+
+            meshes.forEach(mesh => {
+                mesh.rotation.x += mesh.userData.rotSpeedX;
+                mesh.rotation.y += mesh.userData.rotSpeedY;
+                mesh.position.y += Math.sin(Date.now() * 0.001 + mesh.position.x) * mesh.userData.floatSpeed;
+            });
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Ajuste de Redimensionamento da Janela
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
